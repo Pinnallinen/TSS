@@ -52,7 +52,11 @@ async function updateSchedule(current, updates) {
     err.name = 'Unknown schedule'
     throw err
   }
-
+  
+  if(updates.supervisor_id === 'null'){
+    updates.supervisor_id = null;
+  }
+  
   return knex('scheduled_range_supervision')
     .whereIn('id', ids)
     .update(updates)
